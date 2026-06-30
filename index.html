@@ -25,7 +25,7 @@
 
     .nav-logo {
       display: block;
-      height: 64px;
+      height: 88px;
       width: auto;
     }
 
@@ -97,13 +97,19 @@
       align-items: center;
       justify-content: center;
       min-width: 0;
+    }
+
+    /* Wrapper that shrinks to fit the screenshot — phone positions relative to this */
+    .hero-visual-inner {
       position: relative;
+      display: inline-block;
+      max-width: 680px;
+      width: 100%;
     }
 
     /* Desktop screenshot */
     .hero-screenshot {
       width: 100%;
-      max-width: 680px;
       border-radius: 10px;
       box-shadow: 0 24px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06);
       display: block;
@@ -112,8 +118,8 @@
     /* Phone mockup — gold frame */
     .phone-mockup {
       position: absolute;
-      bottom: -20px;
-      right: -10px;
+      bottom: -30px;
+      right: -24px;
       width: 112px;
       background: linear-gradient(160deg, #E8C55A 0%, #C49A2D 50%, #9A7520 100%);
       border-radius: 28px;
@@ -581,7 +587,7 @@
 
     @media (max-width: 640px) {
       nav { padding: 20px 20px; }
-      .nav-logo { height: 48px; }
+      .nav-logo { height: 60px; }
       .feature-item { flex: 0 1 100%; }
       .hero { padding: 90px 20px 40px; }
     }
@@ -604,6 +610,7 @@
       <p class="hero-demo">Book a free demo today</p>
     </div>
     <div class="hero-visual">
+      <div class="hero-visual-inner">
       <img src="images/dashboard-preview.png" class="hero-screenshot" alt="CornerHQ dashboard preview">
 
       <div class="phone-mockup">
@@ -653,6 +660,7 @@
           </div>
 
         </div>
+      </div>
       </div>
     </div>
   </section>
