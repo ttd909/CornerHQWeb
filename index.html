@@ -49,15 +49,18 @@
     /* ── Hero ── */
     .hero {
       background: #0A1628;
-      min-height: 75vh;
+      min-height: 82vh;
       display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 100px 24px 60px;
+      padding: 100px 48px 60px;
+      gap: 48px;
+      overflow: hidden;
     }
 
-    .hero-inner { max-width: 760px; }
+    .hero-inner {
+      flex: 0 0 auto;
+      max-width: 500px;
+    }
 
     .hero-tag {
       display: inline-block;
@@ -74,7 +77,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-size: clamp(2rem, 3.5vw, 3rem);
       font-weight: 800;
       color: #ffffff;
       line-height: 1.15;
@@ -83,13 +86,25 @@
     }
 
     .hero-sub {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       color: rgba(255,255,255,0.68);
       line-height: 1.75;
       margin-bottom: 44px;
-      max-width: 620px;
-      margin-left: auto;
-      margin-right: auto;
+    }
+
+    .hero-visual {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .hero-visual img {
+      width: 100%;
+      max-width: 760px;
+      border-radius: 10px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
     }
 
     .btn-primary {
@@ -471,10 +486,21 @@
     }
 
     /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 100px 24px 48px;
+        gap: 40px;
+      }
+      .hero-inner { max-width: 600px; }
+    }
+
     @media (max-width: 640px) {
       nav { padding: 20px 20px; }
       .nav-logo { font-size: 1.2rem; }
       .feature-item { flex: 0 1 100%; }
+      .hero { padding: 90px 20px 40px; }
     }
   </style>
 </head>
@@ -493,6 +519,9 @@
       <p class="hero-sub">Manage classes, members, trainers, payments and progress — all in one place. Built for Muay Thai, boxing, kickboxing and martial arts.</p>
       <a href="#contact" class="btn-primary">Talk to Us &amp; Save</a>
       <p class="hero-demo">Book a free demo today</p>
+    </div>
+    <div class="hero-visual">
+      <img src="images/dashboard-preview.png" alt="CornerHQ dashboard preview">
     </div>
   </section>
 
