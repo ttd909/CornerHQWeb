@@ -24,10 +24,9 @@
     }
 
     .nav-logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.5px;
+      display: block;
+      height: 40px;
+      width: auto;
     }
 
     .nav-link {
@@ -585,7 +584,7 @@
 
     @media (max-width: 640px) {
       nav { padding: 20px 20px; }
-      .nav-logo { font-size: 1.2rem; }
+      .nav-logo { height: 32px; }
       .feature-item { flex: 0 1 100%; }
       .hero { padding: 90px 20px 40px; }
     }
@@ -594,7 +593,7 @@
 <body>
 
   <nav>
-    <span class="nav-logo">CornerHQ</span>
+    <img src="images/logo.png" alt="CornerHQ" class="nav-logo">
     <a href="#contact" class="nav-link">Get in Touch</a>
   </nav>
 
