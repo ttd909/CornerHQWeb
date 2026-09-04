@@ -190,6 +190,7 @@ button.link { border: 0; background: none; padding: 0; font: inherit; font-weigh
 .book h2 { font-size: clamp(2.6rem, 6vw, 5.2rem); letter-spacing: -.03em; font-weight: 800; line-height: .96; max-width: 12ch; margin-bottom: 20px; }
 .book-intro p { color: var(--bone-2); font-size: 1.15rem; max-width: 40ch; line-height: 1.5; }
 .form { display: grid; gap: 22px; }
+.form[hidden] { display: none; }
 .field { display: grid; gap: 8px; }
 .field label, .field .label { font-size: 14px; font-weight: 600; color: var(--bone); }
 .pills { position: relative; display: flex; gap: 10px; flex-wrap: wrap; }
