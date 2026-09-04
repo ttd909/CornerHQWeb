@@ -72,6 +72,7 @@ p { margin: 0; }
 .btn-ghost:hover { background: rgba(255, 255, 255, .06); }
 .link { color: var(--gold); font-weight: 600; }
 .link:hover { text-decoration: underline; }
+button.link { border: 0; background: none; padding: 0; font: inherit; font-weight: 600; cursor: pointer; }
 
 /* Nav: dark over the hero, paper once the hero has scrolled away */
 .nav {
@@ -102,7 +103,7 @@ p { margin: 0; }
   background: linear-gradient(180deg, rgba(14, 14, 16, .25) 0%, rgba(14, 14, 16, 0) 35%, rgba(14, 14, 16, .5) 60%, rgba(14, 14, 16, .96) 100%);
 }
 .hero-copy { position: relative; z-index: 2; grid-row: 2; padding-bottom: clamp(40px, 7vh, 80px); }
-.hero h1 { font-size: clamp(2.6rem, 6.2vw, 5.6rem); line-height: .96; letter-spacing: -.03em; font-weight: 800; max-width: 14ch; margin-bottom: 20px; }
+.hero h1 { font-size: clamp(2.4rem, 5.2vw, 4.8rem); line-height: .96; letter-spacing: -.03em; font-weight: 800; max-width: 26ch; margin-bottom: 20px; }
 .hero h1 em { font-style: italic; color: var(--gold-dark); }
 .hero-sub { font-size: clamp(1.05rem, 1.4vw, 1.3rem); color: var(--bone-2); max-width: 42ch; margin-bottom: 28px; line-height: 1.5; }
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
