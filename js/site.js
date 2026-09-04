@@ -24,21 +24,25 @@
   var lightboxClose = document.getElementById('lightbox-close');
   var FULL_REEL = 'video/reel-full.mp4';
 
-  function openLightbox() {
+  var lightboxOpener = null;
+
+  function openLightbox(e) {
     if (!lightbox || !lightboxVideo) return;
+    if (typeof lightbox.showModal !== 'function') {
+      window.open(FULL_REEL, '_blank', 'noopener');
+      return;
+    }
+    lightboxOpener = e && e.currentTarget ? e.currentTarget : null;
     if (!lightboxVideo.getAttribute('src')) lightboxVideo.setAttribute('src', FULL_REEL);
-    if (typeof lightbox.showModal === 'function') lightbox.showModal();
-    else lightbox.setAttribute('open', '');
+    lightbox.showModal();
+    if (lightboxClose) lightboxClose.focus();
     lightboxVideo.currentTime = 0;
     var p = lightboxVideo.play();
     if (p && typeof p.catch === 'function') p.catch(function () {});
   }
 
   function closeLightbox() {
-    if (!lightbox || !lightboxVideo) return;
-    lightboxVideo.pause();
-    if (lightbox.open && typeof lightbox.close === 'function') lightbox.close();
-    else lightbox.removeAttribute('open');
+    if (lightbox && lightbox.open) lightbox.close();
   }
 
   Array.prototype.forEach.call(document.querySelectorAll('.btn-watch'), function (btn) {
@@ -49,8 +53,11 @@
     lightbox.addEventListener('click', function (e) {
       if (e.target === lightbox || e.target.classList.contains('lightbox-inner')) closeLightbox();
     });
-    lightbox.addEventListener('close', function () { if (lightboxVideo) lightboxVideo.pause(); });
-    lightbox.addEventListener('cancel', function () { if (lightboxVideo) lightboxVideo.pause(); });
+    lightbox.addEventListener('close', function () {
+      if (lightboxVideo) lightboxVideo.pause();
+      if (lightboxOpener && typeof lightboxOpener.focus === 'function') lightboxOpener.focus();
+      lightboxOpener = null;
+    });
   }
 
   /* 3. Enquiry form */
@@ -61,8 +68,8 @@
 
   function showError(msg) {
     if (!formError) return;
-    formError.textContent = msg;
     formError.classList.add('is-visible');
+    requestAnimationFrame(function () { formError.textContent = msg; });
   }
 
   if (form) {
