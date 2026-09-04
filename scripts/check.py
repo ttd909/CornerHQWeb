@@ -17,13 +17,17 @@ def fail(msg):
 
 
 def read(path):
-    with open(os.path.join(ROOT, path), encoding="utf-8") as f:
+    full = os.path.join(ROOT, path)
+    if not os.path.exists(full):
+        fail(f"missing file: {path}")
+        return None
+    with open(full, encoding="utf-8") as f:
         return f.read()
 
 
 def check_dashes(path, text):
     for i, line in enumerate(text.splitlines(), 1):
-        if "—" in line or "–" in line:
+        if "\u2014" in line or "\u2013" in line:
             fail(f"{path}:{i}: em/en dash found: {line.strip()[:80]}")
 
 
@@ -35,9 +39,10 @@ def check_assets(html):
         if not os.path.exists(os.path.join(ROOT, ref)):
             fail(f"index.html references missing asset: {ref}")
     css = read("css/site.css")
-    for ref in re.findall(r'url\("?\.\./([^")]+)"?\)', css):
-        if not os.path.exists(os.path.join(ROOT, ref)):
-            fail(f"site.css references missing asset: {ref}")
+    if css:
+        for ref in re.findall(r'url\("?\.\./([^")]+)"?\)', css):
+            if not os.path.exists(os.path.join(ROOT, ref)):
+                fail(f"site.css references missing asset: {ref}")
 
 
 def check_sizes():
@@ -66,8 +71,8 @@ def check_sizes():
 
 def check_rules(html):
     # One CTA label per intent.
-    labels = re.findall(r'class="btn[^"]*"[^>]*>([^<]+)<', html)
-    contact_like = {l.strip() for l in labels if re.search(r"contact|touch|talk|enquir|start", l, re.I)}
+    labels = re.findall(r'class="(?:btn|link)[^"]*"[^>]*>([^<]+)<', html)
+    contact_like = {label.strip() for label in labels if re.search(r"contact|touch|talk|enquir|start", label, re.I)}
     if contact_like:
         fail(f"contact-intent CTA labels other than 'Book a call': {contact_like}")
     # Eyebrow ration: uppercase tracking labels above headings.
@@ -80,7 +85,7 @@ def check_rules(html):
         (r"\bScroll\b(?!bar)", "scroll cue"),
         (r"\bv\d+\.\d+", "version label"),
         (r"Quietly", "AI social-proof phrasing"),
-        (r"\bSeamless|Elevate|Unleash|Next-Gen", "filler verb"),
+        (r"\b(?:Seamless|Elevate|Unleash|Next-Gen)\b", "filler verb"),
     ]:
         if re.search(pat, html):
             fail(f"banned copy pattern: {why} ({pat})")
@@ -90,7 +95,7 @@ def check_rules(html):
     # No inline styles or scripts.
     if re.search(r'\sstyle="', html):
         fail("inline style attribute found; put it in css/site.css")
-    if re.search(r"<script>[^<]", html):
+    if re.search(r"<script(?![^>]*\bsrc=)(?:\s[^>]*)?>[^<]", html):
         fail("inline script found; put it in js/site.js")
     # Google Fonts must not be linked.
     if "fonts.googleapis.com" in html:
@@ -99,18 +104,23 @@ def check_rules(html):
 
 def check_js():
     js = read("js/site.js")
-    if "addEventListener('scroll'" in js or 'addEventListener("scroll"' in js:
+    if js and ("addEventListener('scroll'" in js or 'addEventListener("scroll"' in js):
         fail("scroll listener found in site.js; use IntersectionObserver")
 
 
 def main():
     html = read("index.html")
-    check_dashes("index.html", html)
-    check_dashes("css/site.css", read("css/site.css"))
-    check_dashes("js/site.js", read("js/site.js"))
-    check_assets(html)
+    css = read("css/site.css")
+    js = read("js/site.js")
+    if html:
+        check_dashes("index.html", html)
+        check_assets(html)
+        check_rules(html)
+    if css:
+        check_dashes("css/site.css", css)
+    if js:
+        check_dashes("js/site.js", js)
     check_sizes()
-    check_rules(html)
     check_js()
     if failures:
         print("FAIL")
