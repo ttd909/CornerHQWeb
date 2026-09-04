@@ -35,8 +35,8 @@ Three real pieces, all owned or made by CornerHQ:
 
 1. **Fighter promo for Sing Muay Thai.** 73 seconds, 9:16, 1080p. Source file:
    `C:\Users\Thien\Downloads\Muay Thai Fighter Promo — IG Reel 1080p (1).mp4`.
-2. **singmuaythai.com.au.** Live gym website. Shown as a live embed inside a
-   browser frame, with a link out.
+2. **singmuaythai.com.au.** Live gym website. Shown as a screenshot taken past
+   its splash gate, inside a browser frame that links out.
 3. **The CornerHQ app.** Existing screenshot `images/dashboard-preview.png`.
 
 No other proof ships. No placeholder projects, no anonymised case studies, no
@@ -57,7 +57,7 @@ Sections in order. Layout families must differ from section to section.
 | 6 | What we do | sticky heading left, list right | Heading "What we do", lead "Four things, done for one industry. Buy one or all of them." Four rows: Promo videos, Marketing, Websites, Apps. Each: title, one sentence, a 4:5 still from the reel. Hairlines between rows. |
 | 7 | App pricing | tinted panel | "The gym app is priced by members, not features." One line of copy and the three tiers as a compact row of numbers: $0 up to 20 members, $150 up to 150, $300 unlimited. All tiers include every feature. Link to the enquiry form. |
 | 8 | Book a call | dark band, image behind | Heading "Twenty minutes. No pitch deck." One line, then the enquiry form (section 5). |
-| 9 | Footer | dark | Logo, email, "Sydney, Australia". |
+| 9 | Footer | dark | Logo, "Sydney, Australia". No email address: cornerhq.com.au has no mail routing yet. |
 
 Removed from the current site: the five feature cards, the app-only hero copy,
 the three pricing cards, the two-step form.
@@ -73,7 +73,8 @@ No calendar booking at launch. The form is the only contact path.
   `5406bfa5-c77e-400b-b2ca-8432e988be85`, delivering to the owner's Gmail.
 - On success: inline confirmation, no navigation. Copy: "Got it. We'll reply
   within one business day to set up a time."
-- On failure: inline error with the email address as fallback.
+- On failure: inline error asking to try again. No email fallback until the
+  domain has mail routing.
 - Inputs, labels, placeholders and focus rings pass WCAG AA against the dark band.
 
 ## 6. Video handling
@@ -114,8 +115,8 @@ No calendar booking at launch. The form is the only contact path.
   All gated behind `prefers-reduced-motion`. No animation libraries, no
   `window.addEventListener('scroll')`.
 - **Responsive:** below 860px the triptych collapses to the video alone, all
-  grids go single column, the sticky heading unsticks, the iframe shrinks to
-  380px tall.
+  grids go single column, the sticky heading unsticks, the browser frame shrinks
+  to 380px tall.
 
 ## 8. Rules carried from SubForge and the taste-skill
 
