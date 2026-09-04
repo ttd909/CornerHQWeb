@@ -204,8 +204,8 @@ p { margin: 0; }
 .field input::placeholder, .field textarea::placeholder { color: #7A7570; }
 .field input:focus, .field textarea:focus { outline: 2px solid var(--gold-dark); outline-offset: 0; border-color: var(--gold-dark); }
 .field textarea { min-height: 120px; resize: vertical; }
-.form-error { display: none; color: #F0A38B; font-size: 14px; }
-.form-error.is-visible { display: block; }
+.form-error { color: #F0A38B; font-size: 14px; line-height: 1.4; min-height: 0; }
+.form-error:empty { margin-top: -22px; }
 .form-success { display: none; padding: 24px; border-radius: var(--r); border: 1px solid var(--gold-dark); background: rgba(212, 168, 58, .1); font-size: 1.05rem; line-height: 1.5; }
 .form-success.is-visible { display: block; }
 fieldset.field { border: 0; padding: 0; margin: 0; min-width: 0; }

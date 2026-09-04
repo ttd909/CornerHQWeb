@@ -67,15 +67,13 @@
   var formSubmit = document.getElementById('form-submit');
 
   function showError(msg) {
-    if (!formError) return;
-    formError.classList.add('is-visible');
-    requestAnimationFrame(function () { formError.textContent = msg; });
+    if (formError) formError.textContent = msg;
   }
 
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (formError) formError.classList.remove('is-visible');
+      showError('');
 
       var type = form.querySelector('input[name="Business type"]:checked');
       var name = form.querySelector('#f-name').value.trim();
