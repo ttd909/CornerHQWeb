@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Rebuilds every derived asset from the source reel and the original logo.
 # Run from the repo root in Git Bash. Needs ffmpeg, python3 + Pillow, curl.
+# Paths are specific to Thien's machine on purpose; this is a run-once, re-run-if-the-reel-changes utility.
 set -euo pipefail
 
 REEL="C:/Users/Thien/Downloads/Muay Thai Fighter Promo — IG Reel 1080p (1).mp4"
@@ -14,6 +15,7 @@ def make(src, dst, text_rgb):
     im = Image.open(src).convert("RGBA")
     px = im.load()
     w, h = im.size
+    assert im.size == (1200, 630), f"logo.png is {im.size}; the erase band below assumes 1200x630"
     # Erase the "GYM MANAGEMENT SOFTWARE" tagline: it sits right of the ring
     # (x > 395) in the band y 388..440 of the 1200x630 original.
     for y in range(388, 441):
@@ -46,10 +48,10 @@ ffmpeg -v error -y -ss 27 -i "$REEL" -frames:v 1 -vf "scale=720:-2" -q:v 4 image
 echo "== video"
 # Loop: skip the black fade-in, 30 seconds, muted, 720 wide.
 ffmpeg -v error -y -ss 1.5 -t 30 -i "$REEL" -an -vf "scale=720:-2" \
-  -c:v libx264 -preset slow -crf 26 -movflags +faststart video/reel-loop.mp4
+  -c:v libx264 -pix_fmt yuv420p -preset slow -crf 26 -movflags +faststart video/reel-loop.mp4
 # Full: whole reel, with audio, capped bitrate so it stays near 8 MB.
 ffmpeg -v error -y -i "$REEL" -vf "scale=1080:-2" \
-  -c:v libx264 -preset slow -crf 25 -maxrate 900k -bufsize 1800k \
+  -c:v libx264 -pix_fmt yuv420p -preset slow -crf 25 -maxrate 900k -bufsize 1800k \
   -c:a aac -b:a 96k -movflags +faststart video/reel-full.mp4
 
 echo "== fonts"
@@ -61,8 +63,13 @@ curl -fsSL -o fonts/jetbrains-mono.woff2 \
 echo "== screenshot of singmuaythai.com.au (fallback under the iframe)"
 CHROME="C:/Program Files/Google/Chrome/Application/chrome.exe"
 EDGE="C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
-BIN="$CHROME"; [ -x "$BIN" ] || BIN="$EDGE"
-"$BIN" --headless=new --disable-gpu --hide-scrollbars --window-size=1280,900 \
-  --screenshot="$(pwd)/images/sing-site.png" "https://singmuaythai.com.au" 2>/dev/null || true
+BIN=""
+for cand in "$CHROME" "$EDGE"; do [ -x "$cand" ] && BIN="$cand" && break; done
+if [ -z "$BIN" ]; then
+  echo "warning: no headless browser found, keeping existing images/sing-site.png" >&2
+elif ! "$BIN" --headless=new --disable-gpu --hide-scrollbars --window-size=1280,900 \
+  --screenshot="$(pwd)/images/sing-site.png" "https://singmuaythai.com.au" 2>/dev/null; then
+  echo "warning: screenshot failed, keeping existing images/sing-site.png" >&2
+fi
 
 ls -la images/logo-*.png images/reel video fonts images/sing-site.png
