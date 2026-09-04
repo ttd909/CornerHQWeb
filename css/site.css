@@ -168,15 +168,12 @@ a.browser { display: block; color: inherit; }
 
 /* What we do */
 .services { padding: clamp(80px, 12vh, 140px) 0; }
-.services-grid { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(28px, 5vw, 80px); }
-.services .section-title { position: sticky; top: 100px; margin-bottom: 16px; }
-.services .section-lead { max-width: 30ch; }
-.svc { display: grid; grid-template-columns: 1fr 140px; gap: 24px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--line); }
-.svc:first-child { border-top: 1px solid var(--line); }
-.svc h3 { font-size: 1.6rem; letter-spacing: -.02em; font-weight: 700; margin-bottom: 8px; }
-.svc p { color: var(--ink-2); max-width: 52ch; line-height: 1.5; }
-.svc img { width: 140px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--r); transition: transform .3s var(--ease); }
-.svc:hover img { transform: scale(1.03); }
+.services .section-lead { margin-bottom: 48px; }
+.svc-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 3vw, 40px); padding-top: 40px; border-top: 1px solid var(--line); }
+.svc img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--r); margin-bottom: 20px; transition: transform .4s var(--ease); }
+.svc:hover img { transform: translateY(-4px); }
+.svc h3 { font-size: 1.45rem; letter-spacing: -.02em; font-weight: 700; margin-bottom: 8px; }
+.svc p { color: var(--ink-2); line-height: 1.5; font-size: .98rem; }
 
 /* App pricing */
 .app { padding: 0 0 clamp(80px, 12vh, 140px); }
@@ -255,10 +252,7 @@ footer a:hover { color: var(--bone); }
   .browser-body { height: 380px; }
   .who { grid-template-columns: 1fr; }
   .who a { min-height: 340px; padding: 28px; }
-  .services-grid { grid-template-columns: 1fr; }
-  .services .section-title { position: static; }
-  .svc { grid-template-columns: 1fr 96px; }
-  .svc img { width: 96px; }
+  .svc-row { grid-template-columns: 1fr 1fr; gap: 24px; }
   .app-shots { grid-template-columns: 1fr; }
   .phone-shot { max-width: 320px; margin: 0 auto; }
   .app-box { grid-template-columns: 1fr; }
