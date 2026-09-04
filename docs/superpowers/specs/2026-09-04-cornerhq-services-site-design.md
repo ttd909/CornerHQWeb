@@ -33,11 +33,11 @@ doors, no overlap, and the two sites must not look alike.
 
 Three real pieces, all owned or made by CornerHQ:
 
-1. **Fighter promo for Sing Muay Thai.** 73 seconds, 9:16, 1080p. Source file:
+1. **Fighter promo for Rodlek P.K. Saenchai (Sing Muay Thai).** 73 seconds, 9:16, 1080p. Source file:
    `C:\Users\Thien\Downloads\Muay Thai Fighter Promo — IG Reel 1080p (1).mp4`.
 2. **singmuaythai.com.au.** Live gym website. Shown as a screenshot taken past
    its splash gate, inside a browser frame that links out.
-3. **The CornerHQ app.** Existing screenshot `images/dashboard-preview.png`.
+3. **The CornerHQ app.** Real member app screenshot `images/member-app.png` (Sing Muay Thai, cream and gold) plus the admin mock `images/dashboard-preview.png`, recoloured to the same palette and re-shot from `preview/index.html`.
 
 No other proof ships. No placeholder projects, no anonymised case studies, no
 invented numbers. Every figure on the page must be provable (runtime, aspect

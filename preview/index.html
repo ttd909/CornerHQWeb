@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CornerHQ — Dashboard Preview</title>
+  <title>CornerHQ - Dashboard Preview</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #eef0f4;
+      background: #F6F3ED;
       color: #333;
       display: flex;
       height: 100vh;
@@ -20,7 +20,7 @@
     /* ── Sidebar ── */
     .sidebar {
       width: 190px;
-      background: #0A1628;
+      background: #1C1C1E;
       flex-shrink: 0;
       display: flex;
       flex-direction: column;
@@ -33,7 +33,7 @@
 
     .sidebar-logo { padding: 0 18px 22px; }
     .sidebar-logo .brand {
-      color: #FF6B00;
+      color: #A6711F;
       font-size: 0.65rem;
       font-weight: 800;
       letter-spacing: 0.1em;
@@ -56,7 +56,7 @@
       user-select: none;
     }
     .nav-item.active {
-      background: #FF6B00;
+      background: #A6711F;
       color: #fff;
       margin: 2px 10px;
       border-radius: 6px;
@@ -84,7 +84,7 @@
     .page-header h1 {
       font-size: 0.85rem;
       font-weight: 800;
-      color: #0A1628;
+      color: #1C1C1E;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
@@ -107,7 +107,7 @@
     .section-header h2 {
       font-size: 0.7rem;
       font-weight: 800;
-      color: #FF6B00;
+      color: #A6711F;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       white-space: nowrap;
@@ -140,7 +140,7 @@
     .stat-value {
       font-size: 1.7rem;
       font-weight: 800;
-      color: #0A1628;
+      color: #1C1C1E;
       line-height: 1;
       margin-bottom: 4px;
     }
@@ -164,7 +164,7 @@
     .chart-title {
       font-size: 0.68rem;
       font-weight: 800;
-      color: #0A1628;
+      color: #1C1C1E;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       margin-bottom: 14px;
@@ -204,9 +204,9 @@
       border-bottom: 1px solid #f3f4f6;
     }
     .payment-row:last-child { border-bottom: none; }
-    .payment-name { font-size: 0.8rem; font-weight: 700; color: #0A1628; }
+    .payment-name { font-size: 0.8rem; font-weight: 700; color: #1C1C1E; }
     .payment-desc { font-size: 0.72rem; color: #aaa; }
-    .payment-amount { font-size: 0.8rem; font-weight: 700; color: #0A1628; text-align: right; }
+    .payment-amount { font-size: 0.8rem; font-weight: 700; color: #1C1C1E; text-align: right; }
     .payment-date { font-size: 0.68rem; color: #aaa; text-align: right; }
 
     /* ── Top classes bars ── */
@@ -227,8 +227,8 @@
     .bar-row:last-child { margin-bottom: 0; }
     .bar-label { font-size: 0.75rem; font-weight: 600; color: #444; width: 160px; flex-shrink: 0; }
     .bar-track { flex: 1; background: #f0f0f0; border-radius: 3px; height: 9px; }
-    .bar-fill { height: 100%; background: #FF6B00; border-radius: 3px; }
-    .bar-count { font-size: 0.75rem; font-weight: 700; color: #0A1628; width: 28px; text-align: right; flex-shrink: 0; }
+    .bar-fill { height: 100%; background: #A6711F; border-radius: 3px; }
+    .bar-count { font-size: 0.75rem; font-weight: 700; color: #1C1C1E; width: 28px; text-align: right; flex-shrink: 0; }
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
@@ -348,13 +348,13 @@
             <canvas id="chart-membership" width="110" height="110"></canvas>
             <div class="doughnut-legend">
               <div class="legend-item">
-                <div class="legend-dot" style="background:#FF6B00"></div>Monthly — 60%
+                <div class="legend-dot" style="background:#A6711F"></div>Monthly - 60%
               </div>
               <div class="legend-item">
-                <div class="legend-dot" style="background:#0A1628"></div>Casual — 30%
+                <div class="legend-dot" style="background:#1C1C1E"></div>Casual - 30%
               </div>
               <div class="legend-item">
-                <div class="legend-dot" style="background:#d0d7df"></div>Annual — 10%
+                <div class="legend-dot" style="background:#d0d7df"></div>Annual - 10%
               </div>
             </div>
           </div>
@@ -444,7 +444,7 @@
     Chart.defaults.font.size = 11;
     Chart.defaults.color = '#aaa';
 
-    // Attendance Over Time — bar chart
+    // Attendance Over Time - bar chart
     new Chart(document.getElementById('chart-attendance'), {
       type: 'bar',
       data: {
@@ -452,7 +452,7 @@
         datasets: [{
           label: 'Check-ins',
           data: [52, 61, 48, 72, 66],
-          backgroundColor: '#FF6B00',
+          backgroundColor: '#A6711F',
           borderRadius: 4,
           borderSkipped: false,
         }]
@@ -470,7 +470,7 @@
       }
     });
 
-    // Retention Rate Trend — line chart
+    // Retention Rate Trend - line chart
     new Chart(document.getElementById('chart-retention'), {
       type: 'line',
       data: {
@@ -478,9 +478,9 @@
         datasets: [{
           label: 'Retention %',
           data: [62, 65, 68, 71, 75, 78],
-          borderColor: '#FF6B00',
-          backgroundColor: 'rgba(255,107,0,0.08)',
-          pointBackgroundColor: '#FF6B00',
+          borderColor: '#A6711F',
+          backgroundColor: 'rgba(166, 113, 31,0.08)',
+          pointBackgroundColor: '#A6711F',
           pointRadius: 4,
           tension: 0.3,
           fill: true,
@@ -503,7 +503,7 @@
       }
     });
 
-    // Revenue Over Time — line chart
+    // Revenue Over Time - line chart
     new Chart(document.getElementById('chart-revenue'), {
       type: 'line',
       data: {
@@ -511,9 +511,9 @@
         datasets: [{
           label: 'Revenue',
           data: [3200, 3800, 3500, 4100, 4600, 5130],
-          borderColor: '#0A1628',
+          borderColor: '#1C1C1E',
           backgroundColor: 'rgba(10,22,40,0.06)',
-          pointBackgroundColor: '#0A1628',
+          pointBackgroundColor: '#1C1C1E',
           pointRadius: 4,
           tension: 0.3,
           fill: true,
@@ -535,14 +535,14 @@
       }
     });
 
-    // Membership Breakdown — doughnut
+    // Membership Breakdown - doughnut
     new Chart(document.getElementById('chart-membership'), {
       type: 'doughnut',
       data: {
         labels: ['Monthly', 'Casual', 'Annual'],
         datasets: [{
           data: [60, 30, 10],
-          backgroundColor: ['#FF6B00', '#0A1628', '#d0d7df'],
+          backgroundColor: ['#A6711F', '#1C1C1E', '#d0d7df'],
           borderWidth: 0,
           hoverOffset: 4,
         }]
