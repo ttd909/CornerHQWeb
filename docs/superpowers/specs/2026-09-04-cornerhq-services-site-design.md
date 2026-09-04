@@ -52,7 +52,7 @@ Sections in order. Layout families must differ from section to section.
 | 1 | Nav | fixed bar, 72px | Logo, Work, Services, The app, "Book a call" button. Dark over the hero, switches to light paper once the hero scrolls away (IntersectionObserver, no scroll listener). |
 | 2 | Hero | full viewport, dark, triptych | Centre panel: muted looping 720p clip of the reel. Side panels: two stills from the reel at reduced opacity. Bottom-left: headline, subtext, "Book a call" + "See the work". Nothing else in the hero. |
 | 3 | Opinion line | single paragraph on paper | "Most gym sites are a template with a logo dropped in. Most fight promos are phone footage with a beat under it. *We do the other thing.*" Gold italic on the last sentence. |
-| 4 | The work | three pieces, hairline separated | Heading "The work" and one line: "Everything below is real, live and made by CornerHQ." Piece 1: text left, reel in a phone frame right, "Watch with sound" opens a lightbox with the full reel. Piece 2: live singmuaythai.com.au iframe in a browser frame left, text right, "Open the live site". Piece 3: full-width: text then the app screenshot in a browser frame. Under each: two or three real facts in mono. |
+| 4 | The work | three pieces, hairline separated | Heading "The work" and one line: "Everything below is real, live and made by CornerHQ." Piece 1: text left, reel in a phone frame right, "Watch with sound" opens a lightbox with the full reel. Piece 2: screenshot of singmuaythai.com.au (taken past its splash gate) in a browser frame that links to the live site left, text right, "Open the live site". Piece 3: full-width: text then the app screenshot in a browser frame. Under each: two or three real facts in mono. |
 | 5 | Who it's for | two full-bleed dark image blocks | "Gyms" and "Fight promotions", each with one sentence and a "Book a call" link. Background stills from the reel. This is the only mid-page dark media block. |
 | 6 | What we do | sticky heading left, list right | Heading "What we do", lead "Four things, done for one industry. Buy one or all of them." Four rows: Promo videos, Marketing, Websites, Apps. Each: title, one sentence, a 4:5 still from the reel. Hairlines between rows. |
 | 7 | App pricing | tinted panel | "The gym app is priced by members, not features." One line of copy and the three tiers as a compact row of numbers: $0 up to 20 members, $150 up to 150, $300 unlimited. All tiers include every feature. Link to the enquiry form. |
@@ -96,8 +96,9 @@ No calendar booking at launch. The form is the only contact path.
   No other section flips.
 - **Palette:** paper `#F3F3F1`, raised paper `#E9E9E6`, ink `#1C1C1E`, muted ink
   `#6B6B70`, hairline `#D9D9D5`. Dark surfaces: `#0E0E10`, `#151517`, bone text
-  `#EDE8DD`, muted bone `#9B968C`. Gold accent: `#B8891F` on paper, `#D4A83A`
-  on dark. One accent, used identically everywhere.
+  `#EDE8DD`, muted bone `#9B968C`. Gold accent: `#8A6416` on paper (darkened from
+  #B8891F for WCAG AA contrast), `#D4A83A` on dark. One accent, used identically
+  everywhere.
 - **Type:** Bricolage Grotesque for display and body (self-hosted, `font-display:
   swap`). JetBrains Mono for numbers and prices only. No Inter, no serif.
 - **Radius:** 6px on buttons and thumbnails; 10px on browser frames; 28px on the
@@ -151,9 +152,8 @@ Locked. Do not re-litigate during implementation.
 
 - Video fails to load or autoplay is blocked: the poster still shows, the hero
   still reads. No spinner.
-- singmuaythai.com.au iframe blocked or offline: the browser frame shows a static
-  screenshot fallback (`images/sing-site.png`, captured during the build) with
-  the link out still present.
+- singmuaythai.com.au panel is a static screenshot linking out; regenerate with
+  scripts/shoot-sing.py when the site changes.
 - Form: client-side required-field check, server error surfaced inline, email
   address always visible as a fallback.
 - Lightbox: closes on Escape, on backdrop click and on a close button; pauses the

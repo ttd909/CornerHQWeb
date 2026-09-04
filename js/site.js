@@ -106,24 +106,13 @@
     });
   }
 
-  /* 4. Reduced motion and media */
+  /* 4. Looping video: only autoplay when the visitor has not asked for reduced motion */
   var loops = document.querySelectorAll('.hero-video, .loop-video');
-  if (reduceMotion) {
+  if (!reduceMotion) {
     Array.prototype.forEach.call(loops, function (v) {
-      v.removeAttribute('autoplay');
-      v.pause();
+      v.autoplay = true;
+      var q = v.play();
+      if (q && typeof q.catch === 'function') q.catch(function () {});
     });
-  }
-
-  /* Live site iframe: load after the page is idle, fade in when ready.
-     If it never loads, the screenshot underneath stays visible. */
-  var frame = document.querySelector('.site-frame');
-  if (frame && frame.dataset.src) {
-    var loadFrame = function () {
-      frame.addEventListener('load', function () { frame.classList.add('is-loaded'); });
-      frame.src = frame.dataset.src;
-    };
-    if ('requestIdleCallback' in window) requestIdleCallback(loadFrame, { timeout: 4000 });
-    else setTimeout(loadFrame, 1500);
   }
 })();

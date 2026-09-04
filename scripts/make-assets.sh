@@ -36,6 +36,22 @@ def make(src, dst, text_rgb):
 
 make("images/logo.png", "images/logo-light.png", (255, 255, 255))
 make("images/logo.png", "images/logo-dark.png", (28, 28, 30))
+
+for name in ("images/logo-light.png", "images/logo-dark.png"):
+    im = Image.open(name)
+    im = im.resize((440, int(im.height * 440 / im.width)), Image.LANCZOS)
+    im.save(name, optimize=True)
+    print(name, im.size)
+# Favicon: the gold ring is the left ~30% of the mark.
+im = Image.open("images/logo-light.png").convert("RGBA")
+ring = im.crop((0, 0, int(im.width * 0.30), im.height))
+bbox = ring.getbbox()
+ring = ring.crop(bbox)
+side = max(ring.size)
+canvas = Image.new("RGBA", (side, side), (14, 14, 16, 255))
+canvas.paste(ring, ((side - ring.width) // 2, (side - ring.height) // 2), ring)
+canvas.resize((64, 64), Image.LANCZOS).save("images/favicon.png", optimize=True)
+print("images/favicon.png")
 PY
 
 echo "== stills"
@@ -82,16 +98,7 @@ card.save("images/og.jpg", quality=88, optimize=True)
 print("images/og.jpg", card.size)
 PY
 
-echo "== screenshot of singmuaythai.com.au (fallback under the iframe)"
-CHROME="C:/Program Files/Google/Chrome/Application/chrome.exe"
-EDGE="C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
-BIN=""
-for cand in "$CHROME" "$EDGE"; do [ -x "$cand" ] && BIN="$cand" && break; done
-if [ -z "$BIN" ]; then
-  echo "warning: no headless browser found, keeping existing images/sing-site.png" >&2
-elif ! "$BIN" --headless=new --disable-gpu --hide-scrollbars --window-size=1280,900 \
-  --screenshot="$(pwd)/images/sing-site.png" "https://singmuaythai.com.au" 2>/dev/null; then
-  echo "warning: screenshot failed, keeping existing images/sing-site.png" >&2
-fi
+echo "== screenshot of singmuaythai.com.au (past the splash gate)"
+python scripts/shoot-sing.py
 
-ls -la images/logo-*.png images/reel video fonts images/sing-site.png
+ls -la images/logo-*.png images/reel video fonts images/sing-site.jpg

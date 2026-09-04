@@ -51,7 +51,7 @@ def check_sizes():
         "video/reel-full.mp4": 14_000_000,
         "images/logo-light.png": 400_000,
         "images/logo-dark.png": 400_000,
-        "images/sing-site.png": 1_500_000,
+        "images/sing-site.jpg": 400_000,
         "images/og.jpg": 300_000,
     }
     for path, limit in limits.items():

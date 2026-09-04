@@ -12,6 +12,8 @@
   <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.cornerhq.com.au/">
+  <link rel="canonical" href="https://www.cornerhq.com.au/">
+  <link rel="icon" href="images/favicon.png" type="image/png">
   <meta name="theme-color" content="#0E0E10">
   <link rel="preload" href="fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="images/reel/poster.jpg" as="image">
@@ -38,7 +40,7 @@
       <div class="hero-strip" aria-hidden="true">
         <div class="hero-still"><img src="images/reel/f54.jpg" alt="" loading="eager"></div>
         <div>
-          <video class="hero-video" src="video/reel-loop.mp4" poster="images/reel/poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+          <video class="hero-video" src="video/reel-loop.mp4" poster="images/reel/poster.jpg" muted loop playsinline preload="metadata"></video>
         </div>
         <div class="hero-still"><img src="images/reel/f63.jpg" alt="" loading="eager"></div>
       </div>
@@ -76,8 +78,8 @@
             <button class="link btn-watch" type="button">Watch with sound</button>
           </div>
           <div class="phone">
-            <video class="loop-video" src="video/reel-loop.mp4" poster="images/reel/f10.jpg" autoplay muted loop playsinline preload="metadata"></video>
-            <button class="phone-open btn-watch" type="button" aria-label="Tap for sound: watch the full promo"><span>tap for sound</span></button>
+            <video class="loop-video" src="video/reel-loop.mp4" poster="images/reel/f10.jpg" muted loop playsinline preload="metadata"></video>
+            <button class="phone-open btn-watch" type="button" aria-label="Play the full promo with sound"><span>play with sound</span></button>
           </div>
         </article>
 
@@ -85,28 +87,26 @@
           <div class="piece-text">
             <p class="piece-kind">Gym website</p>
             <h3>singmuaythai.com.au</h3>
-            <p>Sydney Muay Thai gym with four world champions on the floor. Classes, trainers, membership and trial bookings, all on one fast site.</p>
+            <p>Sydney Muay Thai gym with four world champions on the floor. Classes, trainers, membership and trial bookings, all on one site.</p>
             <div class="facts">
               <div><b>5</b>membership tiers</div>
               <div><b>4</b>trainer profiles</div>
-              <div><b>1</b>trial booking flow</div>
             </div>
-            <a class="link" href="https://singmuaythai.com.au" target="_blank" rel="noopener">Open the live site</a>
+            <a class="link" href="https://www.singmuaythai.com.au" target="_blank" rel="noopener">Open the live site</a>
           </div>
-          <div class="browser">
+          <a class="browser" href="https://www.singmuaythai.com.au" target="_blank" rel="noopener" aria-label="Open singmuaythai.com.au in a new tab">
             <div class="browser-bar">singmuaythai.com.au</div>
             <div class="browser-body">
-              <img src="images/sing-site.png" alt="Screenshot of the Sing Muay Thai website" loading="lazy" width="1280" height="900">
-              <iframe class="site-frame" data-src="https://singmuaythai.com.au" title="Sing Muay Thai website, live" tabindex="-1"></iframe>
+              <img src="images/sing-site.jpg" alt="Screenshot of the Sing Muay Thai website" loading="lazy" width="1280" height="900">
             </div>
-          </div>
+          </a>
         </article>
 
         <article class="piece piece-wide reveal">
           <div class="piece-text">
             <p class="piece-kind">Gym app</p>
             <h3>The CornerHQ app</h3>
-            <p>Class management, member profiles, payments and messaging, built from scratch for combat sports gyms. Your members get a branded app on their phone.</p>
+            <p>Class management, member profiles, payments and messaging, built from scratch for combat sports gyms. Your members get a branded app they save to their home screen.</p>
             <div class="facts">
               <div><b>$0</b>up to 20 members</div>
               <div><b>All</b>features on every plan</div>
@@ -114,7 +114,7 @@
             <a class="link" href="#app">See app pricing</a>
           </div>
           <div class="browser">
-            <div class="browser-bar">app.cornerhq.com.au</div>
+            <div class="browser-bar">CornerHQ admin</div>
             <div class="browser-body">
               <img src="images/dashboard-preview.png" alt="CornerHQ dashboard showing members, attendance and revenue" loading="lazy" width="1547" height="1058">
             </div>
@@ -135,7 +135,7 @@
           <img src="images/reel/f27.jpg" alt="" loading="lazy">
           <div class="who-text">
             <h3>Fight promotions</h3>
-            <p>Event trailers, fighter promos, ticket pushes, fight card sites and apps.</p>
+            <p>Event trailers and fighter promos for the show, plus fight card sites and apps.</p>
             <span class="link">Book a call</span>
           </div>
         </a>
@@ -181,6 +181,7 @@
       </div>
     </section>
 
+    <span id="pricing" class="anchor" aria-hidden="true"></span>
     <section class="app" id="app">
       <div class="wrap">
         <div class="app-box reveal">
@@ -190,14 +191,16 @@
             <a class="link" href="#book">Book a call</a>
           </div>
           <div class="tiers">
-            <div><b>$0</b>up to 20 members</div>
+            <div><b>$0</b>free up to 20 members</div>
             <div><b>$150</b>a month, up to 150 members</div>
             <div><b>$300</b>a month, unlimited members</div>
           </div>
+          <p class="tiers-note">Prices in AUD.</p>
         </div>
       </div>
     </section>
 
+    <span id="contact" class="anchor" aria-hidden="true"></span>
     <section class="book" id="book">
       <img class="book-bg" src="images/reel/f63.jpg" alt="" loading="lazy">
       <div class="wrap">

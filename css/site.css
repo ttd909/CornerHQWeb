@@ -56,6 +56,8 @@ h1, h2, h3 { margin: 0; }
 p { margin: 0; }
 :focus-visible { outline: 2px solid var(--gold-dark); outline-offset: 3px; }
 .wrap { max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+section[id], .anchor { scroll-margin-top: calc(var(--nav-h) + 24px); }
+.anchor { display: block; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Buttons */
@@ -140,15 +142,14 @@ button.link { border: 0; background: none; padding: 0; font: inherit; font-weigh
 }
 .phone video { width: 100%; height: 100%; object-fit: cover; }
 .phone-open { position: absolute; inset: 0; width: 100%; border: 0; background: transparent; cursor: pointer; color: var(--bone); font: inherit; }
-.phone-open span { position: absolute; inset: auto 0 20px 0; text-align: center; font-family: var(--mono); font-size: 13px; color: var(--bone-2); }
+.phone-open span { position: absolute; inset: auto 0 20px 0; text-align: center; font-size: 13px; color: var(--bone-2); }
 .phone-open:hover span { color: var(--bone); }
 .browser { border-radius: var(--r-frame); overflow: hidden; border: 1px solid var(--dark-line); background: var(--dark-2); box-shadow: 0 30px 80px rgba(28, 28, 30, .25); transition: transform .3s var(--ease); }
 .browser:hover { transform: translateY(-4px); }
+a.browser { display: block; color: inherit; }
 .browser-bar { height: 36px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--dark-line); font-family: var(--mono); font-size: 12px; color: var(--bone-2); }
 .browser-body { position: relative; height: 520px; background: #000; }
 .browser-body img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.browser-body iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; opacity: 0; transition: opacity .4s; }
-.browser-body iframe.is-loaded { opacity: 1; }
 .piece-wide .browser-body { height: auto; }
 .piece-wide .browser-body img { max-height: 640px; }
 
@@ -176,11 +177,12 @@ button.link { border: 0; background: none; padding: 0; font: inherit; font-weigh
 
 /* App pricing */
 .app { padding: 0 0 clamp(80px, 12vh, 140px); }
-.app-box { background: var(--paper-2); border-radius: 12px; padding: clamp(32px, 5vw, 64px); display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: end; }
+.app-box { background: var(--paper-2); border-radius: var(--r-frame); padding: clamp(32px, 5vw, 64px); display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: end; }
 .app h2 { font-size: clamp(1.8rem, 3.2vw, 2.8rem); letter-spacing: -.03em; font-weight: 700; line-height: 1.05; max-width: 22ch; margin-bottom: 10px; }
 .app-box > div > p { color: var(--ink-2); max-width: 55ch; line-height: 1.5; }
 .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; font-family: var(--mono); font-size: 13px; color: var(--ink-2); }
 .tiers b { display: block; font-size: 32px; color: var(--ink); font-weight: 500; letter-spacing: -.02em; margin-bottom: 6px; }
+.app-box .tiers-note { grid-column: 2; font-size: 13px; color: var(--ink-2); }
 .app .link { display: inline-block; margin-top: 20px; }
 
 /* Closing band: heading + enquiry form, the single dark band */
@@ -256,6 +258,7 @@ footer a:hover { color: var(--bone); }
   .svc img { width: 96px; }
   .app-box { grid-template-columns: 1fr; }
   .tiers { grid-template-columns: 1fr; gap: 14px; }
+  .app-box .tiers-note { grid-column: 1; }
   .book .wrap { grid-template-columns: 1fr; }
   .facts { flex-wrap: wrap; gap: 18px; }
 }
