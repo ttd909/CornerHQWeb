@@ -60,6 +60,28 @@ curl -fsSL -o fonts/bricolage-grotesque.woff2 \
 curl -fsSL -o fonts/jetbrains-mono.woff2 \
   "https://cdn.jsdelivr.net/npm/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2"
 
+echo "== social card"
+python - <<'PY'
+from PIL import Image
+# Note: an earlier version of this block tried to feather the still's left
+# edge with a gradient mask, but built the mask at full height before
+# populating only its first row, so the resize to (s.width, H) was a no-op
+# and the composite painted solid dark over the whole still. Plain paste
+# (no fade) is used instead; the still still sits on the right in the
+# card's own dark colour, so the hard edge is barely visible.
+W, H = 1200, 630
+card = Image.new("RGB", (W, H), (14, 14, 16))
+still = Image.open("images/reel/f27.jpg").convert("RGB")
+s = still.resize((int(still.width * H / still.height), H))
+card.paste(s, (W - s.width, 0))
+logo = Image.open("images/logo-light.png").convert("RGBA")
+lw = 560
+logo = logo.resize((lw, int(logo.height * lw / logo.width)))
+card.paste(logo, (80, (H - logo.height) // 2), logo)
+card.save("images/og.jpg", quality=88, optimize=True)
+print("images/og.jpg", card.size)
+PY
+
 echo "== screenshot of singmuaythai.com.au (fallback under the iframe)"
 CHROME="C:/Program Files/Google/Chrome/Application/chrome.exe"
 EDGE="C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"

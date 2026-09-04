@@ -7,7 +7,9 @@
   <meta name="description" content="CornerHQ makes promo videos, marketing, websites and apps for combat sports gyms and fight promotions across Australia.">
   <meta property="og:title" content="CornerHQ: videos, websites and apps for the fight game">
   <meta property="og:description" content="Promo videos, marketing, websites and apps for combat sports gyms and fight promotions across Australia.">
-  <meta property="og:image" content="https://www.cornerhq.com.au/images/reel/f27.jpg">
+  <meta property="og:image" content="https://www.cornerhq.com.au/images/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.cornerhq.com.au/">
   <meta name="theme-color" content="#0E0E10">
@@ -75,7 +77,7 @@
           </div>
           <div class="phone">
             <video class="loop-video" src="video/reel-loop.mp4" poster="images/reel/f10.jpg" autoplay muted loop playsinline preload="metadata"></video>
-            <button class="phone-open btn-watch" type="button" aria-label="Watch the full promo with sound"><span>tap for sound</span></button>
+            <button class="phone-open btn-watch" type="button" aria-label="Tap for sound: watch the full promo"><span>tap for sound</span></button>
           </div>
         </article>
 
@@ -164,7 +166,7 @@
           <div class="svc reveal">
             <div>
               <h3>Websites</h3>
-              <p>Fast, custom built, yours to own. Classes, timetable, trainers, membership and trial bookings that actually convert.</p>
+              <p>Fast, custom built, yours to own. Classes, timetable, trainers, membership and trial bookings.</p>
             </div>
             <img src="images/reel/f70.jpg" alt="" loading="lazy">
           </div>
@@ -196,7 +198,7 @@
       </div>
     </section>
 
-    <section class="book on-dark" id="book">
+    <section class="book" id="book">
       <img class="book-bg" src="images/reel/f63.jpg" alt="" loading="lazy">
       <div class="wrap">
         <div class="book-intro">
@@ -206,7 +208,7 @@
         <form class="form" id="enquiry" action="https://api.web3forms.com/submit" method="POST" novalidate>
           <input type="hidden" name="access_key" value="5406bfa5-c77e-400b-b2ca-8432e988be85">
           <input type="hidden" name="subject" value="New enquiry from cornerhq.com.au">
-          <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off">
+          <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
 
           <fieldset class="field">
             <legend class="label">What do you run?</legend>
@@ -254,7 +256,7 @@
     </div>
   </footer>
 
-  <dialog class="lightbox" id="lightbox">
+  <dialog class="lightbox" id="lightbox" aria-label="Full promo video">
     <div class="lightbox-inner">
       <video id="lightbox-video" controls playsinline preload="none" poster="images/reel/poster.jpg"></video>
       <button class="lightbox-close" type="button" id="lightbox-close">Close</button>
