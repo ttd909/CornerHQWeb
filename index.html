@@ -1,1192 +1,266 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CornerHQ — Built for Combat Sports Gyms</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      color: #333333;
-    }
-
-    /* ── Nav ── */
-    nav {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 48px;
-      z-index: 10;
-    }
-
-    .nav-logo {
-      display: block;
-      height: 88px;
-      width: auto;
-    }
-
-    .nav-link {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      border: 1px solid rgba(255,255,255,0.35);
-      padding: 9px 20px;
-      border-radius: 6px;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .nav-link:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.7);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .nav-link.nav-plain { border-color: transparent; }
-
-    /* ── Hero ── */
-    .hero {
-      background: #0A1628;
-      min-height: 82vh;
-      display: flex;
-      align-items: center;
-      padding: 100px 48px 60px;
-      gap: 48px;
-      overflow: hidden;
-    }
-
-    .hero-inner {
-      flex: 0 0 auto;
-      max-width: 500px;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      background: rgba(196,154,45,0.15);
-      color: #C49A2D;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 20px;
-      margin-bottom: 28px;
-      border: 1px solid rgba(196,154,45,0.3);
-    }
-
-    .hero h1 {
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 800;
-      color: #ffffff;
-      line-height: 1.15;
-      letter-spacing: -0.5px;
-      margin-bottom: 24px;
-    }
-
-    .hero-sub {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.68);
-      line-height: 1.75;
-      margin-bottom: 44px;
-    }
-
-    .hero-visual {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 0;
-    }
-
-    /* Wrapper that shrinks to fit the screenshot — phone positions relative to this */
-    .hero-visual-inner {
-      position: relative;
-      display: inline-block;
-      max-width: 680px;
-      width: 100%;
-    }
-
-    /* Desktop screenshot */
-    .hero-screenshot {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06);
-      display: block;
-    }
-
-    /* Phone mockup — gold frame */
-    .phone-mockup {
-      position: absolute;
-      bottom: -30px;
-      right: -24px;
-      width: 112px;
-      background: linear-gradient(160deg, #E8C55A 0%, #C49A2D 50%, #9A7520 100%);
-      border-radius: 28px;
-      border: 3px solid #D4AA3A;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,220,100,0.4);
-      overflow: hidden;
-      padding: 14px 0 0;
-    }
-
-    .phone-island {
-      width: 52px;
-      height: 14px;
-      background: #A8821C;
-      border-radius: 10px;
-      margin: 0 auto 10px;
-      border: 2px solid #8A6A14;
-    }
-
-    .phone-screen {
-      background: #eef0f4;
-      padding: 10px 8px 16px;
-      border-radius: 0 0 24px 24px;
-    }
-
-    .phone-header {
-      background: #0A1628;
-      border-radius: 5px;
-      padding: 6px 8px;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .phone-brand { color: #C49A2D; font-size: 5.5px; font-weight: 800; letter-spacing: 0.08em; }
-    .phone-title { color: #fff; font-size: 5px; font-weight: 700; letter-spacing: 0.06em; }
-
-    .phone-section-label {
-      font-size: 5px;
-      font-weight: 800;
-      color: #C49A2D;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .phone-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3px;
-      margin-bottom: 6px;
-    }
-    .phone-card {
-      background: #fff;
-      border-radius: 4px;
-      padding: 5px 5px 4px;
-      border: 1px solid #e4e9f0;
-    }
-    .phone-card-label { font-size: 4px; color: #bbb; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 2px; }
-    .phone-card-val { font-size: 9px; font-weight: 800; color: #0A1628; line-height: 1; }
-    .phone-card-desc { font-size: 3.5px; color: #aaa; margin-top: 1px; }
-
-    .phone-chart {
-      background: #fff;
-      border-radius: 4px;
-      padding: 5px 6px;
-      border: 1px solid #e4e9f0;
-    }
-    .phone-chart-title { font-size: 4.5px; font-weight: 800; color: #0A1628; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 5px; }
-    .phone-bars {
-      display: flex;
-      align-items: flex-end;
-      gap: 3px;
-      height: 28px;
-    }
-    .phone-bar { flex: 1; background: #C49A2D; border-radius: 1.5px; }
-
-    .btn-primary {
-      display: inline-block;
-      background: #C49A2D;
-      color: #ffffff;
-      font-size: 1rem;
-      font-weight: 700;
-      padding: 16px 40px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-      letter-spacing: 0.01em;
-    }
-
-    .btn-primary:hover {
-      background: #A8821C;
-      transform: translateY(-1px);
-    }
-
-    .hero-demo {
-      margin-top: 14px;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.4);
-    }
-
-    /* ── Features ── */
-    .features {
-      background: #ffffff;
-      padding: 96px 24px;
-    }
-
-    .features-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .features-header h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #0A1628;
-      letter-spacing: -0.3px;
-      margin-bottom: 10px;
-    }
-
-    .features-header p {
-      color: #777;
-      font-size: 1.05rem;
-    }
-
-    .features-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 24px;
-      max-width: 1040px;
-      margin: 0 auto;
-    }
-
-    .feature-item {
-      flex: 0 1 280px;
-      text-align: center;
-      padding: 36px 28px;
-      border-radius: 14px;
-      border: 1px solid #E8ECF2;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-
-    .feature-item:hover {
-      box-shadow: 0 10px 36px rgba(10,22,40,0.09);
-      transform: translateY(-2px);
-    }
-
-    .feature-icon {
-      width: 56px;
-      height: 56px;
-      background: rgba(196,154,45,0.1);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-    }
-
-    .feature-icon svg {
-      width: 26px;
-      height: 26px;
-      stroke: #C49A2D;
-      fill: none;
-      stroke-width: 1.75;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .feature-item h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #0A1628;
-      margin-bottom: 8px;
-    }
-
-    .feature-item p {
-      font-size: 0.9rem;
-      color: #666;
-      line-height: 1.65;
-    }
-
-    /* ── Pricing ── */
-    .pricing {
-      background: #0A1628;
-      padding: 96px 24px;
-    }
-
-    .pricing-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-
-    .pricing-header h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.3px;
-      margin-bottom: 10px;
-    }
-
-    .pricing-header p {
-      color: rgba(255,255,255,0.68);
-      font-size: 1.05rem;
-    }
-
-    .pricing-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: stretch;
-      gap: 24px;
-      max-width: 1040px;
-      margin: 0 auto;
-    }
-
-    .price-card {
-      flex: 0 1 300px;
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 36px 28px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .price-card.featured {
-      border: 2px solid #C49A2D;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
-    }
-
-    .price-badge {
-      position: absolute;
-      top: -13px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #C49A2D;
-      color: #ffffff;
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: 20px;
-      white-space: nowrap;
-    }
-
-    .price-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #0A1628;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 14px;
-    }
-
-    .price-amount {
-      font-size: 2.6rem;
-      font-weight: 800;
-      color: #0A1628;
-      line-height: 1;
-    }
-
-    .price-amount span {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #999;
-    }
-
-    .price-cap {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #C49A2D;
-      margin: 10px 0 24px;
-    }
-
-    .price-features {
-      list-style: none;
-      border-top: 1px solid #E8ECF2;
-      padding-top: 22px;
-      margin-bottom: 28px;
-      flex: 1;
-    }
-
-    .price-features li {
-      font-size: 0.9rem;
-      color: #555;
-      padding-left: 26px;
-      position: relative;
-      margin-bottom: 12px;
-    }
-
-    .price-features li::before {
-      content: "\2713";
-      position: absolute;
-      left: 0;
-      color: #C49A2D;
-      font-weight: 800;
-    }
-
-    .price-cta {
-      display: block;
-      text-align: center;
-      padding: 13px;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      text-decoration: none;
-      border: 1.5px solid #D0D7DF;
-      color: #0A1628;
-      transition: border-color 0.15s, background 0.15s, color 0.15s;
-    }
-
-    .price-cta:hover {
-      border-color: #C49A2D;
-      color: #C49A2D;
-    }
-
-    .price-cta.gold {
-      background: #C49A2D;
-      border-color: #C49A2D;
-      color: #ffffff;
-    }
-
-    .price-cta.gold:hover {
-      background: #A8821C;
-      border-color: #A8821C;
-      color: #ffffff;
-    }
-
-    .pwa-callout {
-      max-width: 1040px;
-      margin: 48px auto 0;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(196,154,45,0.35);
-      border-radius: 14px;
-      padding: 32px 36px;
-      display: flex;
-      gap: 24px;
-      align-items: flex-start;
-    }
-
-    .pwa-icon {
-      width: 56px;
-      height: 56px;
-      flex-shrink: 0;
-      background: rgba(196,154,45,0.15);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .pwa-icon svg {
-      width: 26px;
-      height: 26px;
-      stroke: #C49A2D;
-      fill: none;
-      stroke-width: 1.75;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .pwa-callout h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 8px;
-    }
-
-    .pwa-callout p {
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.68);
-      line-height: 1.7;
-    }
-
-    /* ── Contact ── */
-    .contact {
-      background: #F5F7FA;
-      padding: 96px 24px;
-    }
-
-    .contact-inner {
-      max-width: 560px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .contact-inner h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #0A1628;
-      margin-bottom: 10px;
-    }
-
-    .contact-inner > p {
-      color: #777;
-      font-size: 1.05rem;
-      margin-bottom: 40px;
-    }
-
-    .contact-form { text-align: left; }
-
-    .form-group { margin-bottom: 20px; }
-
-    .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #0A1628;
-      margin-bottom: 6px;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1px solid #D0D7DF;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-family: inherit;
-      color: #333;
-      background: #ffffff;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      outline: none;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: #C49A2D;
-      box-shadow: 0 0 0 3px rgba(196,154,45,0.12);
-    }
-
-    .form-group textarea {
-      height: 110px;
-      resize: vertical;
-    }
-
-    /* ── Step indicator ── */
-    .step-indicator {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 10px;
-    }
-
-    .step-dot {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 2px solid #D0D7DF;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #aaa;
-      transition: all 0.25s;
-      flex-shrink: 0;
-    }
-
-    .step-dot.active {
-      border-color: #C49A2D;
-      background: #C49A2D;
-      color: #ffffff;
-    }
-
-    .step-dot.done {
-      border-color: #C49A2D;
-      background: #C49A2D;
-      color: #ffffff;
-    }
-
-    .step-line {
-      width: 64px;
-      height: 2px;
-      background: #D0D7DF;
-      transition: background 0.3s;
-    }
-
-    .step-line.done { background: #C49A2D; }
-
-    .step-label {
-      text-align: center;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #999;
-      margin-bottom: 32px;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-
-    /* ── Choice pills ── */
-    fieldset { border: none; }
-
-    .choice-group { margin-bottom: 24px; }
-
-    .choice-group legend {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: #0A1628;
-      margin-bottom: 10px;
-      width: 100%;
-    }
-
-    .choice-note {
-      font-weight: 400;
-      color: #999;
-    }
-
-    .choice-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .choice-pills input[type="radio"],
-    .choice-pills input[type="checkbox"] {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-      width: 0;
-      height: 0;
-    }
-
-    .choice-pills label {
-      display: inline-block;
-      padding: 9px 18px;
-      border: 1.5px solid #D0D7DF;
-      border-radius: 24px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: #555;
-      cursor: pointer;
-      transition: border-color 0.15s, background 0.15s, color 0.15s;
-      background: #ffffff;
-      user-select: none;
-    }
-
-    .choice-pills label:hover {
-      border-color: #b0b8c4;
-      color: #333;
-    }
-
-    .choice-pills input:checked + label {
-      border-color: #C49A2D;
-      background: rgba(196,154,45,0.08);
-      color: #C49A2D;
-      font-weight: 600;
-    }
-
-    .field-error {
-      font-size: 0.78rem;
-      color: #e53935;
-      margin-top: 6px;
-      display: none;
-    }
-
-    .form-submit {
-      width: 100%;
-      padding: 14px;
-      background: #C49A2D;
-      color: #ffffff;
-      font-size: 1rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s;
-      font-family: inherit;
-      margin-top: 8px;
-    }
-
-    .form-submit:hover { background: #A8821C; }
-
-    .form-nav {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 8px;
-    }
-
-    .btn-back {
-      background: none;
-      border: 1.5px solid #D0D7DF;
-      color: #666;
-      font-size: 0.9rem;
-      font-weight: 600;
-      padding: 13px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: inherit;
-      white-space: nowrap;
-      transition: border-color 0.15s, color 0.15s;
-    }
-
-    .btn-back:hover { border-color: #aaa; color: #333; }
-
-    .form-nav .form-submit { margin-top: 0; flex: 1; }
-
-    .form-success {
-      display: none;
-      background: #ffffff;
-      border: 1px solid #D0D7DF;
-      border-radius: 14px;
-      padding: 52px 32px;
-      text-align: center;
-    }
-
-    .form-success-icon {
-      width: 56px;
-      height: 56px;
-      background: rgba(196,154,45,0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-    }
-
-    .form-success-icon svg {
-      width: 28px;
-      height: 28px;
-      stroke: #C49A2D;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .form-success h3 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #0A1628;
-      margin-bottom: 8px;
-    }
-
-    .form-success p { color: #777; }
-
-    /* ── Footer ── */
-    footer {
-      background: #0A1628;
-      padding: 24px;
-      text-align: center;
-      color: rgba(255,255,255,0.4);
-      font-size: 0.85rem;
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 100px 24px 48px;
-        gap: 40px;
-      }
-      .hero-inner { max-width: 600px; }
-    }
-
-    @media (max-width: 640px) {
-      nav { padding: 20px 20px; }
-      .nav-logo { height: 60px; }
-      .feature-item { flex: 0 1 100%; }
-      .hero { padding: 90px 20px 40px; }
-      .price-card { flex: 0 1 100%; }
-      .pwa-callout { flex-direction: column; padding: 28px 24px; }
-    }
-  </style>
+  <title>CornerHQ: videos, websites and apps for the fight game</title>
+  <meta name="description" content="CornerHQ makes promo videos, marketing, websites and apps for combat sports gyms and fight promotions across Australia.">
+  <meta property="og:title" content="CornerHQ: videos, websites and apps for the fight game">
+  <meta property="og:description" content="Promo videos, marketing, websites and apps for combat sports gyms and fight promotions across Australia.">
+  <meta property="og:image" content="https://www.cornerhq.com.au/images/reel/f27.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.cornerhq.com.au/">
+  <meta name="theme-color" content="#0E0E10">
+  <link rel="preload" href="fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="images/reel/poster.jpg" as="image">
+  <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 
-  <nav>
-    <img src="images/logo.png" alt="CornerHQ" class="nav-logo">
-    <div class="nav-links">
-      <a href="#pricing" class="nav-link nav-plain">Pricing</a>
-      <a href="#contact" class="nav-link">Get in Touch</a>
-    </div>
-  </nav>
+  <header class="nav" id="nav">
+    <a class="nav-logo" href="#top" aria-label="CornerHQ home">
+      <img class="logo-light" src="images/logo-light.png" alt="CornerHQ" width="220" height="70">
+      <img class="logo-dark" src="images/logo-dark.png" alt="CornerHQ" width="220" height="70">
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#app">The app</a>
+    </nav>
+    <a class="btn" href="#book">Book a call</a>
+  </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-inner">
-      <span class="hero-tag">Built for Combat Sports</span>
-      <h1>The All-in-One Platform Built for Combat Sports Gyms</h1>
-      <p class="hero-sub">Manage classes, members, trainers, payments and progress — all in one place. Built for Muay Thai, boxing, kickboxing and martial arts.</p>
-      <a href="#contact" class="btn-primary">Talk to Us &amp; Save</a>
-      <p class="hero-demo">Book a free demo today</p>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-visual-inner">
-      <img src="images/dashboard-preview.png" class="hero-screenshot" alt="CornerHQ dashboard preview">
+  <main id="top">
 
-      <div class="phone-mockup">
-        <div class="phone-island"></div>
-        <div class="phone-screen">
+    <section class="hero" id="hero">
+      <div class="hero-strip" aria-hidden="true">
+        <div class="hero-still"><img src="images/reel/f54.jpg" alt="" loading="eager"></div>
+        <div>
+          <video class="hero-video" src="video/reel-loop.mp4" poster="images/reel/poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+        </div>
+        <div class="hero-still"><img src="images/reel/f63.jpg" alt="" loading="eager"></div>
+      </div>
+      <div class="wrap hero-copy">
+        <h1 class="rise">Videos, websites and apps for the <em>fight game.</em></h1>
+        <p class="hero-sub rise">CornerHQ works with combat sports gyms and fight promotions across Australia. One partner for the whole picture.</p>
+        <div class="hero-ctas rise">
+          <a class="btn" href="#book">Book a call</a>
+          <a class="btn btn-ghost" href="#work">See the work</a>
+        </div>
+      </div>
+    </section>
 
-          <div class="phone-header">
-            <span class="phone-brand">CornerHQ</span>
-            <span class="phone-title">ANALYTICS</span>
+    <section class="opinion">
+      <div class="wrap">
+        <p class="reveal">Most gym sites are a template with a logo dropped in. Most fight promos are phone footage with a beat under it. <em>We do the other thing.</em></p>
+      </div>
+    </section>
+
+    <section class="work" id="work">
+      <div class="wrap">
+        <h2 class="section-title reveal">The work</h2>
+        <p class="section-lead reveal">Everything below is real, live and made by CornerHQ.</p>
+
+        <article class="piece reveal">
+          <div class="piece-text">
+            <p class="piece-kind">Fighter promo</p>
+            <h3>Sing Muay Thai</h3>
+            <p>A 73-second promo cut for Instagram. Shot dark, cut to the fighter's own words, built to stop the scroll and sell the gym.</p>
+            <div class="facts">
+              <div><b>73s</b>runtime</div>
+              <div><b>9:16</b>cut for Reels</div>
+              <div><b>1080p</b>delivered</div>
+            </div>
+            <button class="link btn-watch" type="button">Watch with sound</button>
           </div>
+          <div class="phone">
+            <video class="loop-video" src="video/reel-loop.mp4" poster="images/reel/f10.jpg" autoplay muted loop playsinline preload="metadata"></video>
+            <button class="phone-open btn-watch" type="button" aria-label="Watch the full promo with sound"><span>tap for sound</span></button>
+          </div>
+        </article>
 
-          <div class="phone-section-label">Members</div>
-          <div class="phone-cards">
-            <div class="phone-card">
-              <div class="phone-card-label">Attendance</div>
-              <div class="phone-card-val">247</div>
-              <div class="phone-card-desc">Check-ins</div>
+        <article class="piece piece-flip reveal">
+          <div class="piece-text">
+            <p class="piece-kind">Gym website</p>
+            <h3>singmuaythai.com.au</h3>
+            <p>Sydney Muay Thai gym with four world champions on the floor. Classes, trainers, membership and trial bookings, all on one fast site.</p>
+            <div class="facts">
+              <div><b>5</b>membership tiers</div>
+              <div><b>4</b>trainer profiles</div>
+              <div><b>1</b>trial booking flow</div>
             </div>
-            <div class="phone-card">
-              <div class="phone-card-label">Retention</div>
-              <div class="phone-card-val">78%</div>
-              <div class="phone-card-desc">Members seen</div>
-            </div>
-            <div class="phone-card">
-              <div class="phone-card-label">Revenue</div>
-              <div class="phone-card-val">$5.1k</div>
-              <div class="phone-card-desc">This month</div>
-            </div>
-            <div class="phone-card">
-              <div class="phone-card-label">Members</div>
-              <div class="phone-card-val">89</div>
-              <div class="phone-card-desc">Active</div>
+            <a class="link" href="https://singmuaythai.com.au" target="_blank" rel="noopener">Open the live site</a>
+          </div>
+          <div class="browser">
+            <div class="browser-bar">singmuaythai.com.au</div>
+            <div class="browser-body">
+              <img src="images/sing-site.png" alt="Screenshot of the Sing Muay Thai website" loading="lazy" width="1280" height="900">
+              <iframe class="site-frame" data-src="https://singmuaythai.com.au" title="Sing Muay Thai website, live" tabindex="-1"></iframe>
             </div>
           </div>
+        </article>
 
-          <div class="phone-section-label">Classes</div>
-          <div class="phone-chart">
-            <div class="phone-chart-title">Attendance</div>
-            <div class="phone-bars">
-              <div class="phone-bar" style="height:52%"></div>
-              <div class="phone-bar" style="height:70%"></div>
-              <div class="phone-bar" style="height:44%"></div>
-              <div class="phone-bar" style="height:88%"></div>
-              <div class="phone-bar" style="height:65%"></div>
-              <div class="phone-bar" style="height:100%"></div>
+        <article class="piece piece-wide reveal">
+          <div class="piece-text">
+            <p class="piece-kind">Gym app</p>
+            <h3>The CornerHQ app</h3>
+            <p>Class management, member profiles, payments and messaging, built from scratch for combat sports gyms. Your members get a branded app on their phone.</p>
+            <div class="facts">
+              <div><b>$0</b>up to 20 members</div>
+              <div><b>All</b>features on every plan</div>
+            </div>
+            <a class="link" href="#app">See app pricing</a>
+          </div>
+          <div class="browser">
+            <div class="browser-bar">app.cornerhq.com.au</div>
+            <div class="browser-body">
+              <img src="images/dashboard-preview.png" alt="CornerHQ dashboard showing members, attendance and revenue" loading="lazy" width="1547" height="1058">
             </div>
           </div>
+        </article>
+      </div>
 
+      <div class="who">
+        <a href="#book">
+          <img src="images/reel/f10.jpg" alt="" loading="lazy">
+          <div class="who-text">
+            <h3>Gyms</h3>
+            <p>Muay Thai, boxing, kickboxing, MMA, BJJ. From one room to multi-site.</p>
+            <span class="link">Book a call</span>
+          </div>
+        </a>
+        <a href="#book">
+          <img src="images/reel/f27.jpg" alt="" loading="lazy">
+          <div class="who-text">
+            <h3>Fight promotions</h3>
+            <p>Event trailers, fighter promos, ticket pushes, fight card sites and apps.</p>
+            <span class="link">Book a call</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="wrap services-grid">
+        <div>
+          <h2 class="section-title reveal">What we do</h2>
+          <p class="section-lead reveal">Four things, done for one industry. Buy one or all of them.</p>
         </div>
-      </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features -->
-  <section class="features">
-    <div class="features-header">
-      <h2>Everything Your Gym Needs</h2>
-      <p>One platform to run your entire operation</p>
-    </div>
-    <div class="features-grid">
-
-      <div class="feature-item">
-        <div class="feature-icon">
-          <!-- Calendar icon -->
-          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        </div>
-        <h3>Class Management</h3>
-        <p>Schedule classes, manage trainers and track attendance with ease.</p>
-      </div>
-
-      <div class="feature-item">
-        <div class="feature-icon">
-          <!-- Users icon -->
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h3>Member Profiles</h3>
-        <p>Track levels, progress notes and training pathways for every member.</p>
-      </div>
-
-      <div class="feature-item">
-        <div class="feature-icon">
-          <!-- Credit card icon -->
-          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-        </div>
-        <h3>Payments</h3>
-        <p>Memberships, billing and payment history managed in one place.</p>
-      </div>
-
-      <div class="feature-item">
-        <div class="feature-icon">
-          <!-- Message icon -->
-          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-        <h3>Communication</h3>
-        <p>Keep members engaged and connected with your gym.</p>
-      </div>
-
-      <div class="feature-item">
-        <div class="feature-icon">
-          <!-- Settings icon -->
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        </div>
-        <h3>Built Around You</h3>
-        <p>Every feature can be tailored to fit the way your gym operates.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section class="pricing" id="pricing">
-    <div class="pricing-header">
-      <h2>Simple, Honest Pricing</h2>
-      <p>Every plan includes every feature. You only pay for the size of your gym.</p>
-    </div>
-
-    <div class="pricing-grid">
-
-      <div class="price-card">
-        <h3>Starter</h3>
-        <div class="price-amount">$0<span>/month</span></div>
-        <p class="price-cap">Up to 20 active members</p>
-        <ul class="price-features">
-          <li>Branded gym app (PWA)</li>
-          <li>Class management</li>
-          <li>Member profiles</li>
-          <li>Payments &amp; billing</li>
-          <li>Automated emails</li>
-          <li>Reports</li>
-          <li>Social media links</li>
-        </ul>
-        <a href="#contact" class="price-cta">Get Started Free</a>
-      </div>
-
-      <div class="price-card featured">
-        <span class="price-badge">Most Popular</span>
-        <h3>Advanced</h3>
-        <div class="price-amount">$150<span>/month</span></div>
-        <p class="price-cap">Up to 150 active members</p>
-        <ul class="price-features">
-          <li>Branded gym app (PWA)</li>
-          <li>Class management</li>
-          <li>Member profiles</li>
-          <li>Payments &amp; billing</li>
-          <li>Automated emails</li>
-          <li>Reports</li>
-          <li>Social media links</li>
-        </ul>
-        <a href="#contact" class="price-cta gold">Talk to Us</a>
-      </div>
-
-      <div class="price-card">
-        <h3>Professional</h3>
-        <div class="price-amount">$300<span>/month</span></div>
-        <p class="price-cap">Unlimited members</p>
-        <ul class="price-features">
-          <li>Branded gym app (PWA)</li>
-          <li>Class management</li>
-          <li>Member profiles</li>
-          <li>Payments &amp; billing</li>
-          <li>Automated emails</li>
-          <li>Reports</li>
-          <li>Social media links</li>
-        </ul>
-        <a href="#contact" class="price-cta">Talk to Us</a>
-      </div>
-
-    </div>
-
-    <div class="pwa-callout">
-      <div class="pwa-icon">
-        <!-- Smartphone icon -->
-        <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-      </div>
-      <div>
-        <h3>Your Own Gym App — Included in Every Plan</h3>
-        <p>Every plan comes with a Progressive Web App (PWA) carrying your gym's logo. When members save it to their home screen, it looks and behaves exactly like a regular app — no browser bar, works offline, and supports push notifications. No app store approval, no extra cost.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section class="contact" id="contact">
-    <div class="contact-inner">
-      <h2>Get in Touch</h2>
-      <p>Tell us about your gym and we'll be in touch shortly.</p>
-
-      <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" id="contact-form">
-        <input type="hidden" name="access_key" value="5406bfa5-c77e-400b-b2ca-8432e988be85">
-        <input type="hidden" name="Biggest Challenges" id="challenges-hidden" value="">
-
-        <!-- Step indicator -->
-        <div class="step-indicator">
-          <div class="step-dot active" id="dot-1">1</div>
-          <div class="step-line" id="step-line"></div>
-          <div class="step-dot" id="dot-2">2</div>
-        </div>
-        <p class="step-label" id="step-label">About Your Gym</p>
-
-        <!-- Step 1: Multiple choice -->
-        <div id="step-1">
-          <fieldset class="choice-group">
-            <legend>What type of gym do you run?</legend>
-            <div class="choice-pills">
-              <input type="radio" name="Gym Type" id="type-muaythai" value="Muay Thai">
-              <label for="type-muaythai">Muay Thai</label>
-              <input type="radio" name="Gym Type" id="type-boxing" value="Boxing">
-              <label for="type-boxing">Boxing</label>
-              <input type="radio" name="Gym Type" id="type-kickboxing" value="Kickboxing">
-              <label for="type-kickboxing">Kickboxing</label>
-              <input type="radio" name="Gym Type" id="type-mma" value="MMA / Mixed">
-              <label for="type-mma">MMA / Mixed</label>
-              <input type="radio" name="Gym Type" id="type-strength" value="Strength Gym">
-              <label for="type-strength">Strength Gym</label>
-              <input type="radio" name="Gym Type" id="type-pilates" value="Pilates">
-              <label for="type-pilates">Pilates</label>
-              <input type="radio" name="Gym Type" id="type-other" value="Other">
-              <label for="type-other">Other</label>
+        <div>
+          <div class="svc reveal">
+            <div>
+              <h3>Promo videos</h3>
+              <p>Fighter promos, fight night trailers, gym reels. Shot and cut for Instagram, TikTok and the big screen at the venue.</p>
             </div>
-            <p class="field-error" id="err-gym-type">Please select a gym type.</p>
-          </fieldset>
-
-          <fieldset class="choice-group">
-            <legend>How many active members do you have?</legend>
-            <div class="choice-pills">
-              <input type="radio" name="Member Count" id="size-50" value="Under 50">
-              <label for="size-50">Under 50</label>
-              <input type="radio" name="Member Count" id="size-150" value="50–150">
-              <label for="size-150">50–150</label>
-              <input type="radio" name="Member Count" id="size-300" value="150–300">
-              <label for="size-300">150–300</label>
-              <input type="radio" name="Member Count" id="size-300plus" value="300+">
-              <label for="size-300plus">300+</label>
+            <img src="images/reel/f54.jpg" alt="" loading="lazy">
+          </div>
+          <div class="svc reveal">
+            <div>
+              <h3>Marketing</h3>
+              <p>Trial offers, fight ticket pushes, member campaigns. Ads and content that speak the language of the gym floor.</p>
             </div>
-            <p class="field-error" id="err-member-count">Please select a member count.</p>
-          </fieldset>
+            <img src="images/reel/f45.jpg" alt="" loading="lazy">
+          </div>
+          <div class="svc reveal">
+            <div>
+              <h3>Websites</h3>
+              <p>Fast, custom built, yours to own. Classes, timetable, trainers, membership and trial bookings that actually convert.</p>
+            </div>
+            <img src="images/reel/f70.jpg" alt="" loading="lazy">
+          </div>
+          <div class="svc reveal">
+            <div>
+              <h3>Apps</h3>
+              <p>The CornerHQ gym app, plus custom builds: fight card apps, ticketing, member portals.</p>
+            </div>
+            <img src="images/reel/f27.jpg" alt="" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <fieldset class="choice-group">
-            <legend>What's your biggest challenge right now? <span class="choice-note">(select all that apply)</span></legend>
-            <div class="choice-pills">
-              <input type="checkbox" class="challenge-check" id="ch-scheduling" value="Scheduling & class management">
-              <label for="ch-scheduling">Scheduling & classes</label>
-              <input type="checkbox" class="challenge-check" id="ch-progress" value="Tracking member progress">
-              <label for="ch-progress">Member progress</label>
-              <input type="checkbox" class="challenge-check" id="ch-payments" value="Collecting payments">
-              <label for="ch-payments">Collecting payments</label>
-              <input type="checkbox" class="challenge-check" id="ch-engagement" value="Keeping members engaged">
-              <label for="ch-engagement">Member engagement</label>
-              <input type="checkbox" class="challenge-check" id="ch-trainers" value="Managing trainers">
-              <label for="ch-trainers">Managing trainers</label>
+    <section class="app" id="app">
+      <div class="wrap">
+        <div class="app-box reveal">
+          <div>
+            <h2>The gym app is priced by members, not features.</h2>
+            <p>Every plan has everything. Start free, pay when the gym grows.</p>
+            <a class="link" href="#book">Book a call</a>
+          </div>
+          <div class="tiers">
+            <div><b>$0</b>up to 20 members</div>
+            <div><b>$150</b>a month, up to 150 members</div>
+            <div><b>$300</b>a month, unlimited members</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="book on-dark" id="book">
+      <img class="book-bg" src="images/reel/f63.jpg" alt="" loading="lazy">
+      <div class="wrap">
+        <div class="book-intro">
+          <h2 class="reveal">Twenty minutes. No pitch deck.</h2>
+          <p class="reveal">Tell us about the gym or the show. We'll reply within one business day to set up a time.</p>
+        </div>
+        <form class="form" id="enquiry" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <input type="hidden" name="access_key" value="5406bfa5-c77e-400b-b2ca-8432e988be85">
+          <input type="hidden" name="subject" value="New enquiry from cornerhq.com.au">
+          <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off">
+
+          <fieldset class="field">
+            <legend class="label">What do you run?</legend>
+            <div class="pills">
+              <label><input type="radio" name="Business type" value="Gym" required><span>Gym</span></label>
+              <label><input type="radio" name="Business type" value="Fight promotion"><span>Fight promotion</span></label>
+              <label><input type="radio" name="Business type" value="Both"><span>Both</span></label>
             </div>
           </fieldset>
 
-          <fieldset class="choice-group">
-            <legend>Are you currently using any software to manage your gym?</legend>
-            <div class="choice-pills">
-              <input type="radio" name="Current Software" id="sw-no" value="No, doing it manually">
-              <label for="sw-no">No, doing it manually</label>
-              <input type="radio" name="Current Software" id="sw-bad" value="Yes, but not working well">
-              <label for="sw-bad">Yes, but not working well</label>
-              <input type="radio" name="Current Software" id="sw-new" value="Just getting started">
-              <label for="sw-new">Just getting started</label>
-            </div>
-            <p class="field-error" id="err-software">Please select an option.</p>
-          </fieldset>
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="Name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-business">Gym or promotion name</label>
+            <input id="f-business" name="Business" type="text" autocomplete="organization" required>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="Email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="f-message">What do you need? (optional)</label>
+            <textarea id="f-message" name="Message"></textarea>
+          </div>
 
-          <button type="button" class="form-submit" id="btn-next">Continue &rarr;</button>
+          <p class="form-error" id="form-error" role="alert"></p>
+          <div>
+            <button class="btn" type="submit" id="form-submit">Book a call</button>
+          </div>
+        </form>
+        <div class="form-success" id="form-success" role="status" tabindex="-1">
+          Got it. We'll reply within one business day to set up a time.
         </div>
-
-        <!-- Step 2: Contact details -->
-        <div id="step-2" style="display:none">
-          <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="John Smith">
-          </div>
-          <div class="form-group">
-            <label for="gym">Gym Name</label>
-            <input type="text" id="gym" name="gym" placeholder="Apex Muay Thai">
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="john@yourgym.com">
-          </div>
-          <div class="form-group">
-            <label for="message">Anything else you'd like us to know? <span style="color:#999;font-weight:400;">(optional)</span></label>
-            <textarea id="message" name="message" placeholder="Any extra context about your gym or what you're looking for..."></textarea>
-          </div>
-          <div class="form-nav">
-            <button type="button" class="btn-back" id="btn-back">&larr; Back</button>
-            <button type="submit" class="form-submit">Send Message</button>
-          </div>
-        </div>
-      </form>
-
-      <div class="form-success" id="form-success">
-        <div class="form-success-icon">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h3>Thanks! We'll be in touch soon.</h3>
-        <p>We'll review your message and get back to you within one business day.</p>
       </div>
-    </div>
-  </section>
+    </section>
+
+  </main>
 
   <footer>
-    <p>&copy; 2026 CornerHQ. All rights reserved.</p>
+    <div class="wrap">
+      <img src="images/logo-light.png" alt="CornerHQ" width="176" height="56">
+      <span>Sydney, Australia</span>
+    </div>
   </footer>
 
-  <script>
-    // Step navigation
-    document.getElementById('btn-next').addEventListener('click', function () {
-      var gymType = document.querySelector('input[name="Gym Type"]:checked');
-      var memberCount = document.querySelector('input[name="Member Count"]:checked');
-      var software = document.querySelector('input[name="Current Software"]:checked');
-      var valid = true;
+  <dialog class="lightbox" id="lightbox">
+    <div class="lightbox-inner">
+      <video id="lightbox-video" controls playsinline preload="none" poster="images/reel/poster.jpg"></video>
+      <button class="lightbox-close" type="button" id="lightbox-close">Close</button>
+    </div>
+  </dialog>
 
-      document.getElementById('err-gym-type').style.display = gymType ? 'none' : 'block';
-      document.getElementById('err-member-count').style.display = memberCount ? 'none' : 'block';
-      document.getElementById('err-software').style.display = software ? 'none' : 'block';
-
-      if (!gymType || !memberCount || !software) return;
-
-      document.getElementById('step-1').style.display = 'none';
-      document.getElementById('step-2').style.display = 'block';
-      document.getElementById('dot-1').className = 'step-dot done';
-      document.getElementById('dot-2').className = 'step-dot active';
-      document.getElementById('step-line').className = 'step-line done';
-      document.getElementById('step-label').textContent = 'Your Details';
-    });
-
-    document.getElementById('btn-back').addEventListener('click', function () {
-      document.getElementById('step-2').style.display = 'none';
-      document.getElementById('step-1').style.display = 'block';
-      document.getElementById('dot-1').className = 'step-dot active';
-      document.getElementById('dot-2').className = 'step-dot';
-      document.getElementById('step-line').className = 'step-line';
-      document.getElementById('step-label').textContent = 'About Your Gym';
-    });
-
-    // Submit
-    document.getElementById('contact-form').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      var form = e.target;
-      var name = form.querySelector('#name').value.trim();
-      var email = form.querySelector('#email').value.trim();
-      if (!name || !email) return;
-      var checked = Array.from(document.querySelectorAll('.challenge-check:checked')).map(function(el) { return el.value; });
-      document.getElementById('challenges-hidden').value = checked.length ? checked.join(', ') : 'None selected';
-      try {
-        var res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-          form.style.display = 'none';
-          document.getElementById('form-success').style.display = 'block';
-        }
-      } catch (_) {}
-    });
-
-    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  </script>
-
+  <script src="js/site.js" defer></script>
 </body>
 </html>
